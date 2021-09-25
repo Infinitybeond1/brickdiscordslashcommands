@@ -20,4 +20,43 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		await interaction.reply({ content: 'Pong!', ephemeral: true });
+	}
+});
+
+
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'help') {
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageSelectMenu()
+					.setCustomId('select')
+					.setPlaceholder('Nothing selected')
+					.addOptions([
+						{
+							label: 'Select me',
+							description: 'This is a description',
+							value: 'first_option',
+						},
+						{
+							label: 'You can select me too',
+							description: 'This is also a description',
+							value: 'second_option',
+						},
+					]),
+			);
+
+		await interaction.reply({ content: 'Welcome to brickbot', components: [row], ephemeral: true  });
+	}
+});
+
+
 client.login(process.env.TOKEN);
