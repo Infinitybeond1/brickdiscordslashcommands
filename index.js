@@ -39,17 +39,67 @@ client.on('interactionCreate', async interaction => {
 			.addComponents(
 				new MessageSelectMenu()
 					.setCustomId('select')
-					.setPlaceholder('Nothing selected')
+					.setPlaceholder('Categories')
 					.addOptions([
 						{
-							label: 'Select me',
+							label: 'Image',
 							description: 'This is a description',
-							value: 'first_option',
+							value: 'img',
 						},
 						{
-							label: 'You can select me too',
+							label: 'Fun',
 							description: 'This is also a description',
-							value: 'second_option',
+							value: 'fun',
+						},
+						{
+							label: 'Backup',
+							description: 'This is a description',
+							value: 'bckup',
+						},
+						{
+							label: 'Economy',
+							description: 'This is a description',
+							value: 'econ',
+						},
+						{
+							label: 'Moderation',
+							description: 'This is a description',
+							value: 'mod',
+						},
+						{
+							label: 'Giveaway',
+							description: 'This is a description',
+							value: 'gway',
+						},
+						{
+							label: 'Info',
+							description: 'This is a description',
+							value: 'inf',
+						},
+						{
+							label: 'Search',
+							description: 'This is a description',
+							value: 'sch',
+						},
+						{
+							label: 'Music',
+							description: 'This is a description',
+							value: 'msc',
+						},
+						{
+							label: 'Owner',
+							description: 'This is a description',
+							value: 'own',
+						},
+						{
+							label: 'Suggestion',
+							description: 'This is a description',
+							value: 'sug',
+						},
+						{
+							label: 'Utility',
+							description: 'This is a description',
+							value: 'util',
 						},
 					]),
 			);
