@@ -1,16 +1,23 @@
-console.log("NodeJS Version: " + process.version)
+const express = require('express');
+const app = express();
+const port = 3000;
 
+app.get('/', (req, res) => res.send('Hello World!'));
 
-// Require the necessary discord.js classes
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 const { Client, Intents } = require('discord.js');
-
-// Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// When the client is ready, run this code (only once)
-client.once('ready', () => {
-	console.log('Ready!');
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
 });
 
-// Login to Discord with your client's token
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return;
+
+  if (interaction.commandName === 'test') {
+    await interaction.reply({ content: 'Hello', ephemeral: true });
+  }
+});
+
 client.login(process.env.TOKEN);
