@@ -20,11 +20,15 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
+const wait = require('util').promisify(setTimeout);
+
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		await interaction.reply({ content: 'Pong!', ephemeral: true });
+		await interaction.reply('Pinging');
+		await wait(500);
+		await interaction.editReply(`Pong is ${client.ws.ping}ms`);
 	}
 });
 
