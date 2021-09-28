@@ -1,23 +1,15 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-
+const chalk = require('chalk')
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
-const { Client, Intents } = require('discord.js');
+app.listen(port, () => console.log((chalk.blueBright)`Webserver is working`));
+const { Client, Intents, MessageButton  } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return;
-
-  if (interaction.commandName === 'test') {
-    await interaction.reply({ content: 'Hello', ephemeral: true });
-  }
+  console.log((chalk.greenBright)`Logged in as ${client.user.tag}!`);
 });
 
 const wait = require('util').promisify(setTimeout);
@@ -111,6 +103,29 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply({ content: 'Welcome to brickbot', components: [row], ephemeral: true  });
 	}
 });
+
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'vote') {
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageButton()
+					.setLabel('Vote')
+					.setURL('https://discordbotlist.com/bots/brickbot')
+					.setStyle('LINK'),
+			);
+
+		await interaction.reply({ content: 'Click below to vote for me on discordbotlist', components: [row] });
+	}
+});
+
+
+
+
+
+
 
 
 client.login(process.env.TOKEN);
